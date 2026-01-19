@@ -10,6 +10,11 @@ A web-based financial modeling tool for simulating merger and acquisition transa
 - **Ownership Structure**: Calculate post-merger ownership splits
 - **Valuation Metrics**: Enterprise value and estimated IRR calculations
 - **Debt Financing**: Model impact of acquisition financing on returns
+- **Sensitivity Analysis**: 1D table showing EPS impact across different premium levels
+- **2D Sensitivity Matrix**: Heatmap showing EPS changes across premium and synergy scenarios
+- **Example Scenarios**: Pre-loaded realistic deal structures (Tech, Healthcare, Financial Services)
+- **Input Validation**: Real-time warnings for unusual or inconsistent inputs
+- **Export Functionality**: Download results as TXT, CSV, or print to PDF
 
 ## Getting Started
 
