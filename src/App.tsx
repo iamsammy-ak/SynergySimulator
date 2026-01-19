@@ -3,43 +3,24 @@ import { CompanyFinancials, MergerAssumptions } from './types';
 import { CompanyInput } from './components/CompanyInput';
 import { AssumptionsInput } from './components/AssumptionsInput';
 import { ResultsDisplay } from './components/ResultsDisplay';
+import { ScenarioSelector } from './components/ScenarioSelector';
+import { SensitivityAnalysis } from './components/SensitivityAnalysis';
+import { ValidationWarnings } from './components/ValidationWarnings';
 import { calculateMerger } from './utils/calculations';
+import { exampleScenarios, Scenario } from './utils/presets';
 import './App.css';
 
-const defaultAcquirer: CompanyFinancials = {
-  name: 'Acquirer Corp',
-  revenue: 1000,
-  ebitda: 200,
-  netIncome: 120,
-  sharesOutstanding: 100,
-  stockPrice: 50,
-  debtOutstanding: 300,
-};
-
-const defaultTarget: CompanyFinancials = {
-  name: 'Target Inc',
-  revenue: 400,
-  ebitda: 80,
-  netIncome: 45,
-  sharesOutstanding: 50,
-  stockPrice: 30,
-  debtOutstanding: 100,
-};
-
-const defaultAssumptions: MergerAssumptions = {
-  premiumPercent: 25,
-  cashPercent: 50,
-  stockPercent: 50,
-  synergyCost: 20,
-  synergyRevenue: 10,
-  debtFinancingAmount: 200,
-  debtInterestRate: 5,
-};
-
 function App() {
-  const [acquirer, setAcquirer] = useState<CompanyFinancials>(defaultAcquirer);
-  const [target, setTarget] = useState<CompanyFinancials>(defaultTarget);
-  const [assumptions, setAssumptions] = useState<MergerAssumptions>(defaultAssumptions);
+  const defaultScenario = exampleScenarios[3]; // Custom Scenario
+  const [acquirer, setAcquirer] = useState<CompanyFinancials>(defaultScenario.acquirer);
+  const [target, setTarget] = useState<CompanyFinancials>(defaultScenario.target);
+  const [assumptions, setAssumptions] = useState<MergerAssumptions>(defaultScenario.assumptions);
+
+  const handleScenarioSelect = (scenario: Scenario) => {
+    setAcquirer(scenario.acquirer);
+    setTarget(scenario.target);
+    setAssumptions(scenario.assumptions);
+  };
 
   const results = calculateMerger(acquirer, target, assumptions);
 
@@ -51,6 +32,14 @@ function App() {
       </header>
 
       <main className="app-main">
+        <ScenarioSelector onSelect={handleScenarioSelect} />
+
+        <ValidationWarnings
+          acquirer={acquirer}
+          target={target}
+          assumptions={assumptions}
+        />
+
         <div className="inputs-section">
           <CompanyInput
             label="Acquirer"
@@ -70,9 +59,13 @@ function App() {
           />
         </div>
 
-        <div className="results-section">
-          <ResultsDisplay results={results} />
-        </div>
+        <ResultsDisplay results={results} />
+
+        <SensitivityAnalysis
+          acquirer={acquirer}
+          target={target}
+          baseAssumptions={assumptions}
+        />
       </main>
     </div>
   );

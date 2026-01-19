@@ -38,23 +38,22 @@ body {
 }
 
 .app-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: start;
-}
-
-@media (max-width: 1200px) {
-  .app-main {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* Input sections */
 .inputs-section {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 24px;
+}
+
+@media (max-width: 1000px) {
+  .inputs-section {
+    grid-template-columns: 1fr;
+  }
 }
 
 .company-input,
@@ -118,8 +117,7 @@ body {
   background: white;
   border: 1px solid #e0e0e0;
   padding: 20px;
-  position: sticky;
-  top: 24px;
+  width: 100%;
 }
 
 .results-display h2 {
@@ -131,15 +129,15 @@ body {
   color: #1a1a1a;
 }
 
-.results-section {
+.results-display .results-section {
   margin-bottom: 32px;
 }
 
-.results-section:last-child {
+.results-display .results-section:last-child {
   margin-bottom: 0;
 }
 
-.results-section h3 {
+.results-display .results-section h3 {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -202,4 +200,210 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+/* Scenario Selector */
+.scenario-selector {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  width: 100%;
+}
+
+.scenario-selector h3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.scenario-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.scenario-card {
+  padding: 16px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.scenario-card:hover {
+  background: white;
+  border-color: #1a1a1a;
+}
+
+.scenario-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.scenario-desc {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Validation Warnings */
+.validation-warnings {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.warning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border-left: 3px solid;
+  background: #fafafa;
+}
+
+.warning-item.error {
+  border-left-color: #c41e3a;
+  background: #fff5f5;
+}
+
+.warning-item.warning {
+  border-left-color: #d97706;
+  background: #fffbeb;
+}
+
+.warning-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.warning-message {
+  font-size: 12px;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+/* Sensitivity Analysis */
+.sensitivity-analysis {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  width: 100%;
+}
+
+.sensitivity-analysis h3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.sensitivity-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.sensitivity-table-wrapper {
+  overflow-x: auto;
+}
+
+.sensitivity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sensitivity-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid #1a1a1a;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+  background: #fafafa;
+}
+
+.sensitivity-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+}
+
+.sensitivity-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.sensitivity-table tbody tr.current-scenario {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.premium-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.current-badge {
+  font-size: 9px;
+  padding: 2px 6px;
+  background: #1a1a1a;
+  color: white;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.sensitivity-table .positive {
+  color: #0a6e0a;
+}
+
+.sensitivity-table .negative {
+  color: #c41e3a;
+}
+
+.sensitivity-table .percent {
+  font-size: 11px;
+  color: #666;
+  margin-left: 4px;
+}
+
+.impact-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.impact-badge.accretive {
+  background: #d1f4d1;
+  color: #0a6e0a;
+}
+
+.impact-badge.dilutive {
+  background: #ffe5e5;
+  color: #c41e3a;
 }
