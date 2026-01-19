@@ -150,7 +150,7 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <p>Built with React + TypeScript | Open source on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <p>Built by <a href="https://github.com/iamsammy-ak" target="_blank" rel="noopener noreferrer">Abhishek Kumar</a> | Open source (MIT License) on <a href="https://github.com/iamsammy-ak/merger-simulator" target="_blank" rel="noopener noreferrer">GitHub</a></p>
       </footer>
     </div>
   );
